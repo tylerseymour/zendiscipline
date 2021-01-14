@@ -1,0 +1,7 @@
+.env
+.idea
+__pycache__
+dist
+node_modules
+frontend/style.css
+venv
