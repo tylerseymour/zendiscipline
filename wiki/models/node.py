@@ -1,10 +1,32 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .textchoices import NodeStatuses, NodeTypes
 
+
+# A node represents a text object in the system.
 class Node(models.Model):
+
     title = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    # Owner of this Node
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     nodes = models.ManyToManyField("self", through="NodeRelation")
+
+    # Node Types (for normalization)
+    type = models.CharField(
+        max_length=3,
+        choices=NodeTypes.choices,
+        default=NodeTypes.NONE
+    )
+
+    # If this is a copy, this is where it was copied from
+    copied_from = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
+
+    status = models.CharField(
+        max_length=10,
+        choices=NodeStatuses.choices,
+        default=NodeStatuses.NONE
+    )
 
     class Meta:
         db_table = "nodes"
