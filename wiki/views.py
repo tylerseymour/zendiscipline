@@ -10,3 +10,10 @@ def home(request):
         'description': "Welcome to Zen Discipline content library"
     }
     return HttpResponse(template.render(context, request))
+
+def app(request):
+    template = loader.get_template('app.html')
+    context = {
+        'title': "Zen Discipline"
+    }
+    return HttpResponse(template.render(context, request))

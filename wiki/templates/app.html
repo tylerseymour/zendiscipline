@@ -7,9 +7,8 @@
   <title>{{ title }}</title>
 </head>
 <body>
-  <section id="index">
-    {{ description }}
-  </section>
-  <a href="/app">Go to React App</a>
+  <div id="root"></div>
+  {% load react_bundle_loader %}
+  {% render_bundle_js "APP" %}
 </body>
 </html>

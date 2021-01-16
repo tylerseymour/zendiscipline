@@ -20,5 +20,6 @@ from wiki import views
 
 urlpatterns = [
     path('', views.home, name='index'),
+    path('app', views.app, name='app'),
     path('admin/', admin.site.urls),
 ]

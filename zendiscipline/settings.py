@@ -23,11 +23,24 @@ environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
+
+REACT_APP_BUILD_DIRECTORY = os.path.join(BASE_DIR, 'frontend', 'app', 'build')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'), # We do this so that django's collectstatic copies or our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
+    os.path.join(REACT_APP_BUILD_DIRECTORY, 'static'),
 )
+
+CREATE_REACT_APP = {
+    'APP': {
+        'BUNDLE_DIR_NAME': REACT_APP_BUILD_DIRECTORY,
+        'FRONT_END_SERVER': "http://localhost:3000/",
+        'is_dev': True,
+    }
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -46,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'create_react_app',
     'wiki'
 ]
 
@@ -130,7 +144,4 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/assets/'
