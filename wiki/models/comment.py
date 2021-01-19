@@ -19,8 +19,13 @@ class Comment(models.Model):
         db_table = "comments"
 
     def __str__(self):
-        return self.title + " by "
+        return self.title + " by " + self.user.username
 
+    def get_user_username(self):
+        return self.user.username
+
+    # Used by django admin, sets the header title for inlines
+    get_user_username.short_description = 'Username'
 
 
 

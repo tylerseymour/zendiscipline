@@ -7,8 +7,14 @@ from .models import Node, NodeRelation, RelationshipType, Comment, Rating
 class CommentInline(admin.TabularInline):
     model = Comment
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'get_user_username')
+
 class RatingInline(admin.TabularInline):
     model = Rating
+
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ('get_type', 'score', 'get_node_title', 'get_user_username')
 
 class NodeInline(admin.TabularInline):
     model = Node.nodes.through
@@ -21,6 +27,8 @@ class NodeAdmin(admin.ModelAdmin):
         NodeInline,
         RatingInline
     ]
+    list_display = ('title', 'type', 'status', 'get_user_username')
+
 
 # Docs don't explain, but you need to register the ModelAdmin when registering the base model
 admin.site.register(Node, NodeAdmin)
@@ -28,5 +36,5 @@ admin.site.register(Node, NodeAdmin)
 
 admin.site.register(NodeRelation)
 admin.site.register(RelationshipType)
-admin.site.register(Comment)
-admin.site.register(Rating)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Rating, RatingAdmin)

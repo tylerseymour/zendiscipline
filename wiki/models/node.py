@@ -34,3 +34,8 @@ class Node(models.Model):
     def __str__(self):
         return self.title
 
+    def get_user_username(self):
+        return self.user.username
+
+    # Used by django admin, sets the header title for inlines
+    get_user_username.short_description = 'Username'

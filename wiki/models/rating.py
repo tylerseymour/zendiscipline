@@ -5,7 +5,7 @@ from .textchoices import RatingTypes
 
 class Rating(models.Model):
 
-    score = models.SmallIntegerField
+    score = models.SmallIntegerField(null=True)
 
     type = models.CharField(
         max_length=3,
@@ -26,5 +26,18 @@ class Rating(models.Model):
         return self.type
 
 
+    # Admin panel inlines
+    def get_type(obj):
+        return obj.get_type_display()
 
+    def get_node_title(self):
+        return self.node.title;
+
+    def get_user_username(self):
+        return self.user.username;
+
+    # Used by django admin, sets the header title for inlines
+    get_type.short_description = 'Type'
+    get_node_title.short_description = 'Node'
+    get_user_username.short_description = 'User'
 
