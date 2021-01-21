@@ -10,6 +10,11 @@
   <section id="index">
     {{ description }}
   </section>
+  <ul>
+      {% for node in nodes %}
+          <li><a href="/nodes/{{ node.id }}">{{ node.title }}</a></li>
+      {%  endfor %}
+  </ul>
   <a href="/app">Go to React App</a>
 </body>
 </html>

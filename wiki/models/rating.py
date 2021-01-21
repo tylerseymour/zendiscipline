@@ -5,6 +5,13 @@ from .textchoices import RatingTypes
 
 class Rating(models.Model):
 
+    class Meta:
+        db_table = "ratings"
+
+    def __str__(self):
+        return self.type
+
+    # Database Fields
     score = models.SmallIntegerField(null=True)
 
     type = models.CharField(
@@ -19,11 +26,6 @@ class Rating(models.Model):
     # Node the comment was made on
     node = models.ForeignKey(Node, on_delete=models.CASCADE)
 
-    class Meta:
-        db_table = "ratings"
-
-    def __str__(self):
-        return self.type
 
 
     # Admin panel inlines

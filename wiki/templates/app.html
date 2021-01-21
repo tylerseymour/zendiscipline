@@ -8,6 +8,7 @@
 </head>
 <body>
   <div id="root"></div>
+  <!-- This will render the bundle defined as APP in the CREATE_REACT_APP in settings.py -->
   {% load react_bundle_loader %}
   {% render_bundle_js "APP" %}
 </body>

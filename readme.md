@@ -70,3 +70,8 @@ npm run dev
 ### Source Materials for setting up this project
 
 - https://github.com/alonronin/react-tailwind-webpack5-boilerplate
+
+#### Front end
+- Create React App
+- Then https://tailwindcss.com/docs/guides/create-react-app
+- This requires use of CRACO https://github.com/gsoft-inc/craco

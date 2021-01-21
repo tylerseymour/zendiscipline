@@ -8,6 +8,8 @@ class Node(models.Model):
 
     title = models.CharField(max_length=255)
 
+    body = models.TextField()
+
     # Owner of this Node
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     nodes = models.ManyToManyField("self", through="NodeRelation")

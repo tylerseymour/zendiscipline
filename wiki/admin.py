@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Node, NodeRelation, RelationshipType, Comment, Rating
 
 
@@ -21,19 +22,36 @@ class NodeInline(admin.TabularInline):
     fk_name = "source"
     sortable_by = "title"
 
-class NodeAdmin(admin.ModelAdmin):
+class NodeAdmin(SummernoteModelAdmin):
     inlines = [
         CommentInline,
         NodeInline,
         RatingInline
     ]
     list_display = ('title', 'type', 'status', 'get_user_username')
+    summernote_fields = 'body'
+
+    class Media:
+        js = (
+           # "//unpkg.com/@popperjs/core@2" ,
+            "admin/popper.js",
+            "admin/js/admin/jquery.3.5.1.min.js",
+            "admin/jquery-ui/jquery-ui.js",
+            "admin/bootstrap/js/bootstrap.js",
+            "admin/bootstrap/js/bootstrap.bundle.js",
+        )
+
+        css = {
+            "all": (
+                "admin/bootstrap/css/bootstrap.css",
+                "admin/jquery-ui/jquery-ui.css",
+                "admin/jquery-ui/jquery-ui.theme.css",
+            )
+        }
 
 
 # Docs don't explain, but you need to register the ModelAdmin when registering the base model
 admin.site.register(Node, NodeAdmin)
-
-
 admin.site.register(NodeRelation)
 admin.site.register(RelationshipType)
 admin.site.register(Comment, CommentAdmin)
